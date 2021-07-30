@@ -1,0 +1,16 @@
+server {
+	server_name       _;
+	listen 80         default_server;
+	listen [::]:80    default_server;
+
+
+  location /ping {
+      add_header Content-Type text/plain;
+      return 200 'pong';
+  }
+
+  location / {
+	root   /opt/;
+   }
+}
+

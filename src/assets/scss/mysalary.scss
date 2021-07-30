@@ -1,0 +1,319 @@
+//设置密码页
+.password {
+	height: 100%;
+	background: #fff;
+	.title {
+		width:100%;
+		padding-top: 0.8rem;
+		font-size:0.36rem;
+		color: #333333;
+		font-weight: bold;
+		text-align: center;
+	}
+	.subTitle {
+		width:100%;
+		text-align: center;
+		margin-top: 0.2rem;
+		font-size: 0.28rem;
+		color: #666666;
+	}
+	.input {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		margin: 0.63rem 1.2rem 0.43rem 1.2rem;
+		.gostInput {
+			width: 100%;
+			position: absolute;
+			z-index: 3;
+			margin: 0;
+			padding: 0;
+			background: rgba($color: #000000, $alpha: 0.3);
+			opacity: 0;
+		}
+		.inputBox {
+			display: inline-block;
+			width: 1rem;
+			height: 1rem;
+			text-align: center;
+			border:none;
+			border-bottom:.01rem solid #DDDDDD;
+		}
+		
+		.inputActive {
+			border-bottom-color: #19AA8D;
+		}
+		
+		.icon {
+			font-size: 0.88rem;
+			color: #19AA8D;
+		}
+	}
+	.option {
+		text-align: center;
+		>span {
+			display: inline-block;
+			height: 0.6rem;
+			line-height: 0.6rem;
+		}
+		.forget {
+			color: #999999;
+			font-size: 0.3rem;
+			margin-right: 0.1rem;
+		}
+		.reset {
+			color: #F8AC59;
+			font-size: 0.3rem;
+		}
+	}
+}
+
+//设置密码
+.setPassword {
+	padding-top: 0.15rem;
+	input {
+        text-align: right;
+    }
+	.setPasswordBtn {
+		margin: 0.22rem 0.3rem 0.22rem 0.3rem;
+	}
+
+	.validCodeBottomLine >div{
+		border-bottom: 1PX solid #E0E0E0;
+	}
+
+	.timeCount {
+		background: #fff;
+		margin: 0;
+		flex: 3;
+		text-align: center;
+		line-height: 44px;
+		color: rgba(42,195,164,0.50);
+	}
+
+	.codeBtn {
+		display: inline-block;
+		width: 2.15rem;
+		text-align: center;
+		color: #19AA8D;
+		font-size: 0.34rem;
+		position: relative;
+		border-left: 1px solid #D8D8D8;
+		padding-left: 0.1rem;
+	}
+
+	.disabledBtn {
+		opacity: 0.5;
+	}
+
+	.errorTel {
+		.errorTelIcon {
+			position: relative;
+			top: 2px;
+			width: 0.3rem;
+			height: 0.3rem;
+			margin: 0 0.1rem 0 0.1rem;
+		}
+		padding: 6px 0;
+		background-color: #FFF3D8;;
+		color: #FAAD14 ;
+		font-size: 0.28rem;
+		span {
+			color: #F5222D;;
+		}
+	}
+}
+
+//工资单列表
+.salaryList {
+	.selectYear {
+		height: 0.9rem;
+		line-height: 0.9rem;
+		margin: 0 0.3rem;
+		>div{
+			display: inline-block;
+			color: #333333;
+			font-size: 0.34rem;
+			&:first-child svg{
+				margin-top: -0.04rem;
+				margin-left: 0.1rem;
+				vertical-align: middle;
+			}
+			&:last-child {
+				float: right;
+			}
+			.eye {
+				width: 0.8rem;
+				height: 0.8rem;
+				vertical-align: middle;
+			}
+		}
+	}
+	.listWrapper {
+		overflow: auto;
+		height: calc(100vh - 0.9rem);
+	}
+
+	.list {
+		display: flex;
+		background: #fff;
+		height: 1.15rem;
+		border-bottom: 1px solid #E4E4E9;
+		padding: 0.2rem 0.3rem;
+		flex-direction: column;
+		justify-content: space-between;
+		.titlewrap {
+			display: flex;
+		}
+		.title {
+			display: inline-block;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.title, .rightTitle {
+			font-size: 0.34rem;
+			color: #333333;
+		}
+		.rightTitle {
+			float: right;
+			color: #666666;
+		}
+		.subTitle {
+			font-size: 0.28rem;
+			color: #999999;
+			bottom: 0;
+		}
+		.confirmBtn, .unConfirmBtn {
+			display: inline-block;
+			float: right;
+			color: #fff;
+			width: 1.04rem;
+			// height: 0.48rem;
+			padding: 0.12rem 0;
+			line-height: 1;
+			font-size: 0.24rem;
+			border-radius: 2px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.confirmBtn {
+			background: #52C41A;
+		}
+		.unConfirmBtn {
+			background: #FAAD14;
+		}
+	}
+	.empty {
+		width: 100%;
+		height: calc(100vh - 4.38rem);
+		padding-top: 3.48rem;
+		font-size: 0.28rem;
+		text-align: center;
+		background-color: #fff;
+		color: rgba(0,0,0,0.25);
+	}
+	.endTip {
+		text-align: center;
+		padding: 0.1rem 0;
+		color: #999999;
+	}
+}
+
+//反馈
+.feedback {
+	color: #666666;
+	padding-top: 0.2rem;
+	ul {
+		position: absolute;
+    	background: #fff;
+		padding: 0.4rem 0.3rem 0 0.3rem;
+		margin: 0;
+		min-height: calc(100% - 0.68rem);
+		li {
+			display: inline-flex;
+			width: 100%;
+			margin-bottom: 0.4rem;
+		}
+		li >span:first-child {
+			display: inline-block;
+			width: 1.8rem;
+			font-size: 0.3rem;
+			color: #333333;
+			text-align: right;
+			font-weight: bold;
+		}
+		.feedbackContent {
+			float: right;
+			width: calc(100% - 1.8rem);
+			font-size: 0.3rem;
+			line-height: 1.5;
+			word-break:break-all;
+		}
+		.feedbackdaycount {
+			color: #F5222D;
+		}
+	}
+}
+
+//问题反馈
+.feedbackModal {
+	>div {
+		border-radius: 0.2rem 0.2rem 0 0;
+	}
+	.feedbackTitle {
+		padding: 0.2rem 0.3rem;
+		div {
+			display: inline-block;
+			height: 0.5rem;
+			line-height: 0.36rem;
+			
+			&::before {
+				display: none
+			}
+			&:first-child {
+				float: left;
+				svg {
+					color: #C7C7CC;
+				}
+			}
+			&:last-child {
+				float: right;
+				font-size: 0.36rem;
+				color: #2AC3A4;
+				vertical-align: middle;
+				
+			}
+		}
+		span {
+			color: #000000;
+			font-weight: bold;
+			font-size: 0.36rem;
+		}
+	}
+	.feedbackdays {
+		height: 0.6rem;
+		line-height: 0.6rem;
+		background-color: #FFF3D8;;
+		color: #666666;
+		text-align: center;
+		font-size: 0.28rem;
+		span {
+			color: #F5222D;
+		}
+		.feedbackIcon {
+			position: relative;
+			top: 2px;
+			width: 0.3rem;
+			height: 0.3rem;
+			margin-right: 0.1rem;
+		}
+	}
+	.feedbackInfo {
+		textarea {
+			height: 6rem;
+			font-family: sans-serif;
+			font-size: 0.28rem;
+		}
+	}
+}
