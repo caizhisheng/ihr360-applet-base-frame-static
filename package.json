@@ -29,7 +29,7 @@
         "fit-transmit-transparently": "3.1.66",
         "http-proxy-middleware": "0.19.1",
         "ihr360-config-plugin": "0.0.2",
-        "ihr360-web-ui": "^3.3.16",
+        "ihr360-web-ui": "^3.3.21",
         "intl": "1.2.5",
         "irs-button": "4.0.2",
         "js-cookie": "2.2.0",
