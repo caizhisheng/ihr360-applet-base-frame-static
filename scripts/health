@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ ${MONIT} = 'extranet' ]
+then
+    url='cloud-admin.ihr360.com'
+else
+    url='cloud-admin.irenshi.cn'
+fi
+
+versionfilepath=$(find /opt/ -name 'version.json')
+sed -i "s/prod/${BRANCH}/" ${versionfilepath}
+jsondata=$(cat ${versionfilepath})
+
+for i in `seq 1 4`
+do
+    echo $(date "+%Y-%m-%d %H:%M:%S") >> /tmp/health.log
+    #curl -v -H "Content-Type:application/json" -X POST -d '{"environment":"prod","application":"irenshi-roster-static","version":"0.0.2","gitInfo":["bf73e38b2ec548b47389d7e5dbd9a6cb466c321f f9b901    ae5a3eb406db3a9d4789523290fba162bc jenkins <jenkins@ihr360.com> 1534227154 +0800\tcheckout: moving from bf73e38b2ec548b47389d7e5dbd9a6cb466c321f to f9b901ae5a3eb406db3a9d4789523290fba162bc"],"abbrevId":"abbrevId","commitTime":"2018-08-14 15:14"}' https://cloud-admin.ihr360.com/monitor/info
+    curl -v -H "Content-Type:application/json" -X POST -d "${jsondata}" https://${url}/monitor/info
+    if [ $i -eq 4 ]
+    then
+	exit 0
+    fi
+    sleep 15s
+done
+
