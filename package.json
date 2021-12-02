@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@sentry/browser": "4.4.2",
-        "@sentry/webpack-plugin": "^1.11.1",
+        "@sentry/webpack-plugin": "1.11.1",
         "@types/fastclick": "1.0.28",
         "@types/intl": "1.2.0",
         "@types/js-cookie": "^2.2.2",
@@ -19,24 +19,19 @@
         "@types/react-redux": "5.0.19",
         "@types/react-router-dom": "4.3.4",
         "@types/redux-logger": "3.0.6",
-        "babel-jest": "22.1.0",
-        "babel-loader": "7.1.2",
-        "babel-polyfill": "6.26.0",
-        "babel-preset-react-app": "3.1.1",
-        "clean-css": "4.2.1",
         "dingtalk-jsapi": "2.7.3",
         "fastclick": "^1.0.6",
         "fit-transmit-transparently": "3.1.66",
         "http-proxy-middleware": "0.19.1",
-        "ihr360-config-plugin": "0.0.2",
-        "ihr360-web-ui": "^3.3.21",
+        "ihr360-config-plugin": "0.0.11",
+        "ihr360-web-ui": "^3.3.27",
         "intl": "1.2.5",
         "irs-button": "4.0.2",
+        "irs-tools": "2.0.8",
         "js-cookie": "2.2.0",
         "loadash": "1.0.0",
         "md5": "2.2.1",
         "node-forge": "0.7.5",
-        "node-sass": "^4.13.1",
         "react": "16.10.2",
         "react-app-rewire-less": "2.1.3",
         "react-dom": "16.9.0",
@@ -45,6 +40,7 @@
         "readline": "1.3.0",
         "redux-logger": "3.0.6",
         "scss-tokenizer": "0.4.2",
+        "single-spa-react": "4.6.0",
         "ts-jest": "22.0.1",
         "uglifyjs-webpack-plugin": "1.2.5",
         "url-search-params-polyfill": "7.0.0",
@@ -65,27 +61,23 @@
         "build:ja_QA2": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=ja NODE_ENV_Trans=https://www.ihr360.com irs-react-scripts-plugin build",
         "build:zh_CN": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=zh_CN NODE_ENV_Trans=https://www.ihr360.com irs-react-scripts-plugin build",
         "build:en": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=en NODE_ENV_Trans=https://www.ihr360.com irs-react-scripts-plugin build",
-        "build:ja": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=ja NODE_ENV_Trans=https://www.ihr360.com irs-react-scripts-plugin build"
+        "build:ja": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=ja NODE_ENV_Trans=https://www.ihr360.com irs-react-scripts-plugin build",
+        "lint-staged": "lint-staged"
     },
     "devDependencies": {
         "@types/jest": "22.2.3",
         "@types/node": "10.0.4",
         "@types/redux-devtools-extension": "2.13.2",
         "@types/redux-thunk": "2.1.0",
-        "babel-plugin-import": "1.11.0",
-        "babel-plugin-transform-class-properties": "6.24.1",
-        "babel-preset-es2015": "6.24.1",
-        "babel-preset-stage-0": "6.24.1",
+        "cross-env": "7.0.3",
         "jspdf": "1.3.5",
         "less": "2.7.3",
         "moment": "2.26.0",
-        "npm-run-all": "4.1.3",
         "react-redux": "5.0.7",
         "react-router-dom": "5.0.1",
         "react-scripts": "2.0.0",
         "redux-devtools-extension": "2.13.2",
-        "redux-thunk": "2.2.0",
-        "sass-loader": "7.0.1"
+        "redux-thunk": "2.2.0"
     },
     "jest": {
         "collectCoverageFrom": [
@@ -131,10 +123,9 @@
             }
         }
     },
-    "babel": {
-        "presets": [
-            "react-app"
-        ]
+    "theme": {
+        "ant-cls-prefix": "applet-base-ant4",
+        "ihr-prefix": "applet-base-ihr3"
     },
     "eslintConfig": {
         "extends": "react-app"

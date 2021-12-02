@@ -1,0 +1,12 @@
+#!/bin/sh
+status_file=/tmp/upload.txt
+if [ -f $status_file ]; then
+  exit 0
+else
+  versionfilepath=$(find /opt -name 'info.json')
+  jsondata=$(cat ${versionfilepath})
+  result=$(curl -v -H "Content-Type:application/json" -X POST -d "${jsondata}" https://${WEB_MONITOR}/gateway/noauth/appPackageConfig/provider/appPackage/configInfo/update)
+  if [ ${result}"x" == "successx" ]; then
+    touch ${status_file}
+  fi
+fi

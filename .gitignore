@@ -25,8 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .cache-loader
-/build-zh_CN
-/build-en
-/build-ja
-
 .cache
+/info.json
