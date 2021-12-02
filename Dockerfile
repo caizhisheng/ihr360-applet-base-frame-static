@@ -9,7 +9,7 @@ ADD ./etc /etc
 #RUN apk add supervisor curl
 # sshd_config file is edited for enable access key and disable access password
 # 根据不同项目修改 /opt/XXX项目名称
-RUN mkdir -p /etc/supervisor.d /opt/payroll-h5
+RUN mkdir -p /etc/supervisor.d /opt/applet-base
 ENV MONIT intranet
 ENV BRANCH dev
 RUN echo '*    *     *     *     *     run-parts /scripts' >> /etc/crontabs/root
@@ -20,10 +20,12 @@ ADD supervisor/cron.ini /etc/supervisor.d/
 RUN chmod +x /scripts/health
 RUN chmod +x /scripts/upload
 
-# ADD build /opt/payroll-h
-ADD  build-en /opt/payroll-h5/en
-ADD  build-zh_CN /opt/payroll-h5/zh_CN
-ADD  build-ja /opt/payroll-h5/ja
+ADD  info.json /opt
+# ADD build
+ADD  build-en /opt/applet-base/en
+ADD  build-zh_CN /opt/applet-base/zh_CN
+ADD  build-ja /opt/applet-base/ja
+
 
 EXPOSE 22
 
