@@ -1,5 +1,3 @@
-
-
 ## 支持rem
   1rem = 100px
 
@@ -23,6 +21,20 @@
 2、组件库：ihr360-web-ui
 3、工具包：irs-tools
 ```
+## 相关地址
+```
+包源地址：http://npm.ihr360.com/repository/irenshi-npm-group/
+组件库地址：https://qa2.ihr360.com/v_3.x/
+组件模版地址：https://qa2.ihr360.com/template/#/
+```
+## 环境版本
+```
+node: 14.16.0
+npm:  6.11.3
+```
 
-
+## 开发IDE
+```
+请使用VsCode
+```
 
