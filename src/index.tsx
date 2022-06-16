@@ -12,7 +12,6 @@ import AppRoute from './router/index';
 import 'url-search-params-polyfill';//处理URLSearchParams的兼容性
 import "./assets/less/common.less";
 import "ihr360-web-ui/packages/theme/index.less";
-import { unregister } from './registerServiceWorker';
 
 import IrsConfigProvider from 'ihr360-web-ui/packages/config-provider/IrsConfigProvider';
 import IrsNotification from 'ihr360-web-ui/packages/base/irs-notification';
@@ -59,4 +58,3 @@ class RootComponent extends React.Component {
     }
 }
 export default RootComponent;
-unregister();
