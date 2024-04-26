@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Layout } from '../../node_modules/antd4';
 import FastClick from 'fastclick'
 import { IrsErrorBoundary } from 'irs-tools'
-import IrsError from 'ihr360-web-ui/packages/capture/irs-error'
+import IrsError from 'ihr360-web-ui3/packages/capture/irs-error'
 const { Content } = Layout;
 
 import { withRouter } from 'react-router-dom';

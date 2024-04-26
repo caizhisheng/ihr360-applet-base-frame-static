@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Sentry from '@sentry/browser';
-// import { IrsError } from 'ihr360-web-ui';
+// import { IrsError } from 'ihr360-web-ui3';
 
 Sentry.init({
   dsn: "https://5aeb981ed5364582920447314cfe7c7a@sentry.io/1367409"

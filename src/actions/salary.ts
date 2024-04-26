@@ -1,7 +1,7 @@
 import IrsFetchHttp  from '../fetch/http';
 const FetchHttp = new IrsFetchHttp();
 
-const gatewayPayrollApi = process.env.REACT_APP_GATEWAY_PAYROLL_URL;
+const gatewayPayrollApi = process.env.REACT_APP_GATEWAY;
 
 /* 接口前缀 */
 const prefix = () => {
