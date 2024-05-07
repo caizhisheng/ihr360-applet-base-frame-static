@@ -24,6 +24,9 @@
 4. 项目webpack打包配置均已集成到配置中心，如需要拓展额外的配置可以在config-overrides.js文件中根据暴露的出口适时添加
 5. git commit message需按要求提交(可参考commitlint.config.js文件)
 6. 全局数据流需按要求采用Redux进行统一管理，可参考项目中的demo样例
+7. 开发时请使用公共图标库，请联系对应UI开权限（https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.12&manage_type=myprojects&projectId=2297032&keyword=&project_type=&page=）
+7. 开发时外部域名需转换为内部域名。
+   例：https://at.alicdn.com --> https://cdn-zoom.ihr360.com
 
 ```
 
