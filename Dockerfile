@@ -23,9 +23,7 @@ RUN chmod +x /scripts/uploadMenu
 
 ADD  info.json /opt
 ADD  menu.json /opt
-COPY  build-en /opt/xxx/en
-COPY  build-zh_CN /opt/xxx/zh_CN
-COPY  build-ja /opt/xxx/ja
+COPY  build /opt/xxx/zh_CN
 
 
 #默认打包方案，便于后端联调

@@ -1,7 +1,11 @@
 import React from "react";
 
-class HomePage extends React.Component {
-   constructor(props: any) {
+interface HomePageProps {
+   bizType?: string;
+}
+
+class HomePage extends React.Component<HomePageProps> {
+   constructor(props: HomePageProps) {
       super(props);
    }
    render() {

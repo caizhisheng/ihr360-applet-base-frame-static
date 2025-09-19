@@ -1,28 +1,27 @@
 import * as React from 'react';
-import { Layout } from '../../node_modules/antd4';
-import FastClick from 'fastclick'
-import { IrsErrorBoundary } from 'irs-tools'
-import IrsError from 'ihr360-web-ui3/packages/capture/irs-error'
+import { Layout } from 'antd4';
+import IrsErrorBoundary from 'ihr360-web-ui3/packages/capture/irs-error-boundary'
+import { LocaleMessages } from '../locale/localeMessage';
+import { ROUTER_PAGE_NAME_OBJ } from '../constants/actionsTypes';
+import { RouteTracker } from 'irs-react-intl';
 const { Content } = Layout;
 
-import { withRouter } from 'react-router-dom';
 import '../index.less';
-
+import withRouter from './withRouter';
+import { Outlet } from 'react-router-dom';
+const projectName = require('../../package.json').name;
 class App extends React.Component<any, any> {
-    componentDidMount() {
-        if ('addEventListener' in document) {
-            document.addEventListener('DOMContentLoaded', () => {
-                (FastClick as any).attach(document.body);
-            }, false);
-        }
-    }
-    
     public render() {
         return (
-            <IrsErrorBoundary error={IrsError}>
+            <IrsErrorBoundary releaseTag='applet_base_production' environment='production'>
                 <Layout style={{ padding: '0 0', width: '100%', height: '100%' }}>
                     <Content style={{ padding: 0, margin: 0, minHeight: 280, height: '100%' }}>
-                        { this.props.children }
+                        <RouteTracker 
+                            routerPageNameObj={ROUTER_PAGE_NAME_OBJ}
+                            LocaleMessages={LocaleMessages}
+                            projectName={projectName}
+                        />
+                        <Outlet />
                     </Content>
                 </Layout>
             </IrsErrorBoundary>
