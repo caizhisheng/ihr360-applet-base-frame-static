@@ -10,6 +10,7 @@
         "@rsbuild/plugin-umd": "^1.0.4",
         "ahooks": "^3.9.5",
         "antd4": "npm:antd@4.24.16",
+        "dotenv": "^17.2.1",
         "http-proxy-middleware": "0.19.1",
         "ihr360-web-ui3": "npm:ihr360-web-ui@7.0.0-beta",
         "intl": "1.2.5",
@@ -35,19 +36,9 @@
     "scripts": {
         "build-vendor": "cross-env NODE_ENV=production webpack --config webpack.dll.config.js --colors --display-modules",
         "start": "rsbuild dev --mode development",
-        "build": "cross-env NODE_ENV_LAN=zh_CN rsbuild build --mode production",
-        "build:zh_CN_QA": "cross-env PUSH_NODE_ENV=qa2 NODE_ENV_LAN=zh_CN rsbuild build --mode production",
-        "build:en_QA": "cross-env PUSH_NODE_ENV=qa2 NODE_ENV_LAN=en rsbuild build --mode production",
-        "build:ja_QA": "cross-env PUSH_NODE_ENV=qa2 NODE_ENV_LAN=ja rsbuild build --mode production",
-        "build:zh_CN_Beta": "cross-env PUSH_NODE_ENV=beta NODE_ENV_LAN=zh_CN rsbuild build --mode production",
-        "build:en_Beta": "cross-env PUSH_NODE_ENV=beta NODE_ENV_LAN=en rsbuild build --mode production",
-        "build:ja_Beta": "cross-env PUSH_NODE_ENV=beta NODE_ENV_LAN=ja rsbuild build --mode production",
-        "build:zh_CN_QA2": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=zh_CN rsbuild build --mode production",
-        "build:en_QA2": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=en rsbuild build --mode production",
-        "build:ja_QA2": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=ja rsbuild build --mode production",
-        "build:zh_CN": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=zh_CN rsbuild build --mode production",
-        "build:en": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=en rsbuild build --mode production",
-        "build:ja": "cross-env PUSH_NODE_ENV=production NODE_ENV_LAN=ja rsbuild build --mode production"
+        "build:QA": "cross-env PUSH_NODE_ENV=qa2 rsbuild build --mode production",
+        "build:Beta": "cross-env PUSH_NODE_ENV=beta rsbuild build --mode production",
+        "build": "cross-env PUSH_NODE_ENV=production rsbuild build --mode production"
     },
     "devDependencies": {
         "@eslint/js": "^8.56.0",
