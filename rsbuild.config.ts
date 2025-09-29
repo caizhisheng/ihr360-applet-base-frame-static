@@ -27,6 +27,7 @@ export default defineConfig((args) => {
     }
     // 获取所有环境变量
     const env = process.env;
+    const OUTPUT_PUBLIC_PATH = ['beta', 'production'].indexOf(process.env.PUSH_NODE_ENV || '') > -1 && process.env.OUTPUT_PUBLIC_PATH ? `${process.env.OUTPUT_PUBLIC_PATH}${process.env.NODE_ENV_LAN || ''}/` : (process.env.REACT_APP_SERVED_PATH || '/');
     return {
         // 源码配置
         source: {
@@ -70,7 +71,7 @@ export default defineConfig((args) => {
          output: isProduction ? {
             target: 'web',
             // 生产环境使用配置的公共路径，开发环境使用根路径
-            assetPrefix: isProduction ? env.REACT_APP_OUTPUT_PUBLIC_PATH : '/',
+            assetPrefix: isProduction ? OUTPUT_PUBLIC_PATH : '/',
             // 输出目录结构配置
             distPath: {
                 root: 'build',
@@ -235,7 +236,7 @@ export default defineConfig((args) => {
                 },
                 inject: 'body',
                 templateParameters: {
-                    assetPrefix: isProduction ? env.REACT_APP_OUTPUT_PUBLIC_PATH : '/'
+                    assetPrefix: isProduction ? OUTPUT_PUBLIC_PATH : '/'
                 }
             },
             // Rspack 配置
@@ -384,7 +385,74 @@ export default defineConfig((args) => {
                                 }
                             });
                         }
-                    }
+                    },
+                    // PostSingleSpaConfigPlugin 类似效果的插件 - 生成 info.json
+                    {
+                        name: 'post-single-spa-config-plugin',
+                        apply(compiler) {
+                            compiler.hooks.done.tap('post-single-spa-config-plugin', (stats) => {
+                                try {
+                                    // 获取构建统计信息
+                                    const statsJson = stats.toJson({
+                                        all: false,
+                                        assets: true,
+                                        entrypoints: true,
+                                        chunks: true,
+                                        modules: false,
+                                    });
+                                    
+                                    // 读取 package.json 获取项目名称
+                                    const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8'));
+                                    const chunkJs: string[] = [];
+                                    const chunkCss: string[] = [];
+                                    if (statsJson.assetsByChunkName) {
+                                        Object.keys(statsJson.assetsByChunkName).forEach(key => {
+                                            if(key !== 'index'){
+                                                const assets = statsJson.assetsByChunkName[key];
+                                                if (Array.isArray(assets)) {
+                                                    assets.forEach((asset: string) => {
+                                                        if(asset.endsWith('.js')){
+                                                            chunkJs.push(OUTPUT_PUBLIC_PATH + asset);
+                                                        }
+                                                        if(asset.endsWith('.css')){
+                                                            chunkCss.push(OUTPUT_PUBLIC_PATH + asset);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                    // 构建 info.json 数据
+                                    const infoData = {
+                                        [process.env.REACT_APP_LIBRARY || '']: {
+                                            appJs: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.js'))[0] || '',
+                                            appCss: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.css'))[0] || '',
+                                            splitChunkJs: chunkJs,
+                                            splitChunkCss: chunkCss,
+                                            baseApp: false,
+                                            hash: process.env.REACT_APP_HASH,
+                                            projectName: packageJson.name,
+                                            dynamicLan: 'true'
+                                        }
+                                    };
+
+                                    // 写入 info.json 到根目录
+                                    const infoJsonPath = path.resolve(__dirname, 'info.json');
+                                    fs.writeFileSync(
+                                        infoJsonPath,
+                                        JSON.stringify(infoData, null, 2),
+                                        'utf-8'
+                                    );
+
+                                    console.log('✨ info.json generated successfully at project root');
+                                    console.log('📄 Info file location:', infoJsonPath);
+                                    
+                                } catch (error) {
+                                    console.error('❌ Failed to generate info.json:', error);
+                                }
+                            });
+                        }
+                    },
                 ] : []
             },
         },

@@ -38,7 +38,7 @@
         "start": "rsbuild dev --mode development",
         "build:QA": "cross-env PUSH_NODE_ENV=qa2 rsbuild build --mode production",
         "build:Beta": "cross-env PUSH_NODE_ENV=beta rsbuild build --mode production",
-        "build": "cross-env PUSH_NODE_ENV=production rsbuild build --mode production"
+        "build:Prod": "cross-env PUSH_NODE_ENV=production rsbuild build --mode production"
     },
     "devDependencies": {
         "@eslint/js": "^8.56.0",
