@@ -425,14 +425,16 @@ export default defineConfig((args) => {
                                     // 构建 info.json 数据
                                     const infoData = {
                                         [process.env.REACT_APP_LIBRARY || '']: {
-                                            appJs: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.js'))[0] || '',
-                                            appCss: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.css'))[0] || '',
-                                            splitChunkJs: chunkJs,
-                                            splitChunkCss: chunkCss,
-                                            baseApp: false,
-                                            hash: process.env.REACT_APP_HASH,
-                                            projectName: packageJson.name,
-                                            dynamicLan: 'true'
+                                            'zh_CN': {
+                                                appJs: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.js'))[0] || '',
+                                                appCss: OUTPUT_PUBLIC_PATH + statsJson.assetsByChunkName?.['index']?.filter((d: string) => d.endsWith('.css'))[0] || '',
+                                                splitChunkJs: chunkJs,
+                                                splitChunkCss: chunkCss,
+                                                baseApp: false,
+                                                hash: process.env.REACT_APP_HASH,
+                                                projectName: packageJson.name,
+                                                dynamicLan: 'true'
+                                            }
                                         }
                                     };
 
