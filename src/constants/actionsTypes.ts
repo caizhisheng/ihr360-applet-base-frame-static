@@ -62,5 +62,6 @@ export const i18nToAntd = {
 } as any;
 
 export const ROUTER_PAGE_NAME_OBJ = {
-    "/home": "首页",
+    "/base/home": "首页",
+    "/base/demo": "示例"
 }

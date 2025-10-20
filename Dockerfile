@@ -13,11 +13,14 @@ ENV MONIT intranet
 ENV BRANCH dev
 RUN echo '*    *     *     *     *     run-parts /scripts' >> /etc/crontabs/root
 ADD scripts/upload /scripts/upload
+ADD scripts/uploadIntl /scripts/uploadIntl
 ADD supervisor/nginx.ini /etc/supervisor.d/
 ADD supervisor/cron.ini /etc/supervisor.d/
 RUN chmod +x /scripts/upload
+RUN chmod +x /scripts/uploadIntl
 
 ADD  info.json /opt
+ADD  intlMessage.json /opt
 COPY  build /opt/xxx
 
 

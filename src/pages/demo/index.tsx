@@ -2,6 +2,7 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { asyncAction, asyncPromiseAction } from '../../actions/demo';
 import { connect } from 'react-redux';
+import { FormattedMessage, injectIntl } from "irs-react-intl";
 import '../../assets/less/index.less';
 import * as _ from 'lodash';
 
@@ -10,6 +11,7 @@ interface DemoProps {
     asyncData?: any;
     asyncAction?: () => void;
     asyncPromiseAction?: () => Promise<any>;
+    intlMessageManagerLocal?: any
 }
 
 class Home extends React.Component<DemoProps, any> {
@@ -94,6 +96,8 @@ class Home extends React.Component<DemoProps, any> {
         return (
             <div>
                 999
+                <FormattedMessage id="IRS_DICT.IRS_DICT.cnb_salary_common_comment_reason" defaultMessage="备注理由" />
+                {this.props.intlMessageManagerLocal('haveConfirm')}
             </div>
         )
     }
@@ -113,4 +117,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home as any)
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Home) as any)

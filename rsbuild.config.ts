@@ -455,6 +455,25 @@ export default defineConfig((args) => {
                             });
                         }
                     },
+                    // 生成 intlMessage.json 的插件
+                    {
+                        name: 'generate-intl-message',
+                        apply(compiler) {
+                            compiler.hooks.done.tap('generate-intl-message', async () => {
+                                try {
+                                    // 调用独立的脚本生成 intlMessage.json
+                                    const { generateIntlMessage } = require(path.resolve(__dirname, 'scripts/generateIntlMessage.js'));
+                                    const result = await generateIntlMessage(__dirname);
+                                    
+                                    if (!result.success) {
+                                        console.error('❌ 生成 intlMessage.json 失败:', result.error);
+                                    }
+                                } catch (error) {
+                                    console.error('❌ 调用 generateIntlMessage 脚本失败:', error);
+                                }
+                            });
+                        }
+                    },
                 ] : []
             },
         },
@@ -672,6 +691,10 @@ export default defineConfig((args) => {
             startUrl: true,
             progressBar: true,
             hmr: true,
+            // 启用 node_modules 热更新
+            watchOptions: {
+                ignored: /node_modules\/(?!irs-tools)/,  // 只监听 irs-tools，忽略其他 node_modules
+            }
         }
     };
 });
