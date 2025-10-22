@@ -21,22 +21,20 @@ const routerConfig = [
           },
           {
             path: "home",
-            lazy: async () => {
-              const Module = await import('../pages/home');
-              const Component = Module.default;
+            async lazy() {
+              const HomePage = await import('../pages/home');
               return {
-                Component: () => <Component bizType="0" />
-              }
+                Component: HomePage.default,
+              };
             },
           },
           {
-            path: "demo",
-            lazy: async () => {
-              const Module = await import('../pages/demo');
-              const Component = Module.default as React.ComponentType<any>;
+            path: "demo", 
+            async lazy() {
+              const DemoPage = await import('../pages/demo');
               return {
-                Component: () => <Component bizType="0" />
-              }
+                Component: DemoPage.default,
+              };
             },
           }
         ]

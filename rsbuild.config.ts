@@ -33,7 +33,7 @@ export default defineConfig((args) => {
         source: {
             // 入口文件配置
             entry: {
-                index: './src/singleSpaEntry.js'
+                index: './src/singleSpaEntry.tsx'
             },
             // 包含的文件路径，用于构建
             include: ['src/**/*'],
@@ -668,8 +668,8 @@ export default defineConfig((args) => {
                         math: 'always',
                         // Ant Design 主题变量配置
                         modifyVars: {
-                            "ant-cls-prefix": "administrative-service-ant4",
-                            "ihr-prefix": "administrative-service-ihr3"
+                            "ant-cls-prefix": "applet-base-ant4",
+                            "ihr-prefix": "applet-base-ihr3"
                         },
                         // Less 文件查找路径
                         paths: [
@@ -692,9 +692,10 @@ export default defineConfig((args) => {
             progressBar: true,
             hmr: true,
             // 启用 node_modules 热更新
-            watchOptions: {
-                ignored: /node_modules\/(?!irs-tools)/,  // 只监听 irs-tools，忽略其他 node_modules
-            }
+            watchFiles: [{
+                type: 'reload-page',
+                paths: ['src/**/*']
+            }]
         }
     };
 });
