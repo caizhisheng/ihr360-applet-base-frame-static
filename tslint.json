@@ -1,0 +1,9 @@
+{
+    "defaultSeverity": "error",
+    "jsRules": {},
+    "rules": {
+        "jsx-no-lambda": false,
+        "semicolon": [false, "always"]
+    },
+    "rulesDirectory": []
+}

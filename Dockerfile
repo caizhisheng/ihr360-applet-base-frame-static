@@ -12,20 +12,16 @@ RUN mkdir -p /etc/supervisor.d /opt/xxx /scripts
 ENV MONIT intranet
 ENV BRANCH dev
 RUN echo '*    *     *     *     *     run-parts /scripts' >> /etc/crontabs/root
-ADD scripts/health /scripts/health
 ADD scripts/upload /scripts/upload
-ADD scripts/uploadMenu /scripts/uploadMenu
+ADD scripts/uploadIntl /scripts/uploadIntl
 ADD supervisor/nginx.ini /etc/supervisor.d/
 ADD supervisor/cron.ini /etc/supervisor.d/
-RUN chmod +x /scripts/health
 RUN chmod +x /scripts/upload
-RUN chmod +x /scripts/uploadMenu
+RUN chmod +x /scripts/uploadIntl
 
 ADD  info.json /opt
-ADD  menu.json /opt
-COPY  build-en /opt/xxx/en
-COPY  build-zh_CN /opt/xxx/zh_CN
-COPY  build-ja /opt/xxx/ja
+ADD  intlMessage.json /opt
+COPY  build /opt/xxx
 
 
 #默认打包方案，便于后端联调

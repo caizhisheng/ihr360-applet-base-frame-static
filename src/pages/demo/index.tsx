@@ -2,11 +2,20 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { asyncAction, asyncPromiseAction } from '../../actions/demo';
 import { connect } from 'react-redux';
+import { FormattedMessage, injectIntl } from "irs-react-intl";
 import '../../assets/less/index.less';
 import * as _ from 'lodash';
 
-class Home extends React.Component<any, any> {
-    constructor(props: any, context: any) {
+interface DemoProps {
+    bizType?: string;
+    asyncData?: any;
+    asyncAction?: () => void;
+    asyncPromiseAction?: () => Promise<any>;
+    intlMessageManagerLocal?: any
+}
+
+class Home extends React.Component<DemoProps, any> {
+    constructor(props: DemoProps, context: any) {
         super(props, context);
         this.state = {
             name: 'React Intl',
@@ -18,7 +27,7 @@ class Home extends React.Component<any, any> {
     /*组件挂载之前执行，只执行一次*/
     componentWillMount() {
         // process.env 获取当前环境变量
-        this.props.asyncAction();
+        this.props.asyncAction?.();
     }
 
     /*组件渲染完成，只执行一次*/
@@ -68,16 +77,18 @@ class Home extends React.Component<any, any> {
     }
 
     getAsyncData = () => {
-        const easyData = this.props.asyncPromiseAction();
-        easyData.data11.then((res: any) => {
-            // 异步获取数据后的逻辑处理...
-        })
+        const easyData = this.props.asyncPromiseAction?.();
+        if (easyData) {
+            easyData.then((res: any) => {
+                // 异步获取数据后的逻辑处理...
+            })
+        }
         return true;
     }
 
     getSynchData = () => {
         // 同步获取数据实时绑定到view，在componentWillReceiveProps钩子函数中接收
-        this.props.asyncAction();
+        this.props.asyncAction?.();
         return true;
     }
 
@@ -85,6 +96,8 @@ class Home extends React.Component<any, any> {
         return (
             <div>
                 999
+                <FormattedMessage id="IRS_DICT.IRS_DICT.cnb_salary_common_comment_reason" defaultMessage="备注理由" />
+                {this.props.intlMessageManagerLocal('haveConfirm')}
             </div>
         )
     }
@@ -104,4 +117,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Home) as any)

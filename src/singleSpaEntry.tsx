@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import singleSpaReact from 'single-spa-react';
 import RootComponent from './index';
 
 
 // 开发环境直接渲染
 if (process.env.NODE_ENV==='development') {
-    ReactDOM.render(<RootComponent/>, document.getElementById('applet-base-spa')); // id名字为各个项目自定义
+    ReactDOM.createRoot(document.getElementById('applet-base-spa')).render(<RootComponent/>); // id名字为各个项目自定义
 }
 
 function domElementGetter() {

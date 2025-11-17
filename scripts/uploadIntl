@@ -1,0 +1,21 @@
+#!/bin/sh
+status_file=/tmp/uploadIntl.txt
+if [ -f $status_file ]; then
+  exit 0
+else
+  versionfilepath=$(find /opt -name 'intlMessage.json')
+  # 使用文件重定向替代将整个文件内容存储在变量中
+  curl -v \
+    -H "Content-Type:application/json" \
+    -X POST \
+    --data-binary "@${versionfilepath}" \
+    "https://${WEB_MONITOR}/gateway/i18n/api/noauth/messageResourceStatistics" > /tmp/curl_result.txt
+
+  # 检查结果
+  if grep -q "success" /tmp/curl_result.txt; then
+    touch ${status_file}
+  fi
+  
+  # 清理临时文件
+  rm -f /tmp/curl_result.txt
+fi
