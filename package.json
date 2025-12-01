@@ -28,7 +28,7 @@
         "redux-devtools-extension": "2.13.2",
         "redux-logger": "3.0.6",
         "redux-thunk": "2.2.0",
-        "single-spa-react": "4.6.0",
+        "single-spa-react": "6.0.2",
         "typescript": "^5.9.2",
         "url-search-params-polyfill": "7.0.0",
         "versiony": "2.0.1"
