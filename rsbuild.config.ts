@@ -2,12 +2,15 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginUmd } from '@rsbuild/plugin-umd';
 import { pluginLess } from '@rsbuild/plugin-less';
+import rspack from '@rspack/core';
 import path from 'path';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 
 export default defineConfig((args) => {
-
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     // 判断是否为生产环境
     const isProduction = args.env === 'production';
     
