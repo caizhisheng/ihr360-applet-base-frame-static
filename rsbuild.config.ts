@@ -7,6 +7,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { createCssColorReplacePlugin } from './scripts/cssColorReplacePlugin';
 
 export default defineConfig((args) => {
     const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +32,27 @@ export default defineConfig((args) => {
     // 获取所有环境变量
     const env = process.env;
     const OUTPUT_PUBLIC_PATH = ['beta', 'production'].indexOf(process.env.PUSH_NODE_ENV || '') > -1 && process.env.OUTPUT_PUBLIC_PATH ? `${process.env.OUTPUT_PUBLIC_PATH}${process.env.NODE_ENV_LAN || ''}/` : (process.env.REACT_APP_SERVED_PATH || '/');
+    const enbObj = {};
+    //环境变量太多会导致报错，所以需要白名单
+    Object.keys(env).forEach((key) => {
+        const allowedPrefixes = ['REACT_APP_', 'WEB_UI_'];
+        const allowedKeys = [
+            'NODE_ENV',
+            'NODE_ENV_LAN', 
+            'NODE_SERVICE_TYPE',
+            'IHR360_WEB_UI_NAME',
+            'OUTPUT_PUBLIC_PATH',
+            'PUSH_NODE_ENV'
+        ];
+        
+        const shouldInclude = 
+            allowedPrefixes.some(prefix => key.startsWith(prefix)) ||
+            allowedKeys.includes(key);
+            
+        if (shouldInclude) {
+            enbObj[key] = JSON.stringify(env[key]);
+        }
+    });
     return {
         // 源码配置
         source: {
@@ -45,7 +67,8 @@ export default defineConfig((args) => {
             // 全局变量定义
             define: {
                 __APP_ENV__: JSON.stringify(env.REACT_APP_ENV),
-               'process.env': JSON.stringify(env),
+               // 定义所有需要的环境变量的白名单
+               'process.env': enbObj,
             },
             // 装饰器配置
             decorators: {
@@ -424,6 +447,11 @@ export default defineConfig((args) => {
                             });
                         }
                     },
+                    // CSS 颜色替换插件 - 将硬编码的颜色值替换为 CSS 变量
+                    createCssColorReplacePlugin({
+                        colorRegex: /#26[cC]2[aA]4;/g,
+                        replacement: 'var(--singlespa-frame-ant4-primary-color,#26c2a4);'
+                    }),
                 ] : []
             },
         },
