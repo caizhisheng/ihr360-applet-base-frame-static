@@ -1,13 +1,12 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginUmd } from '@rsbuild/plugin-umd';
-import { pluginLess } from '@rsbuild/plugin-less';
 import rspack from '@rspack/core';
 import path from 'path';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { createCssColorReplacePlugin } from './scripts/cssColorReplacePlugin';
+// import { createCssColorReplacePlugin } from './scripts/cssColorReplacePlugin';
 
 export default defineConfig((args) => {
     const __filename = fileURLToPath(import.meta.url);
@@ -80,11 +79,12 @@ export default defineConfig((args) => {
         resolve: {
             // 路径别名配置，简化导入路径
             alias: {
+                '@': path.resolve(__dirname, 'src'),
                 'react':  path.resolve(__dirname, 'node_modules/react'),
                 'irs-react-intl': path.resolve(__dirname, 'node_modules/irs-tools/irs-react-intl-uper/index'),
             },
             // 文件扩展名解析顺序
-            extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less'],
+            extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.css'],
             // 模块查找路径
             modules: [
                 path.resolve(__dirname, 'node_modules'),
@@ -447,11 +447,11 @@ export default defineConfig((args) => {
                             });
                         }
                     },
-                    // CSS 颜色替换插件 - 将硬编码的颜色值替换为 CSS 变量
-                    createCssColorReplacePlugin({
-                        colorRegex: /#26[cC]2[aA]4;/g,
-                        replacement: 'var(--singlespa-frame-ant4-primary-color,#26c2a4);'
-                    }),
+                    // CSS 颜色替换插件 - Tailwind CSS 原生支持 CSS 变量,已移除
+                    // createCssColorReplacePlugin({
+                    //     colorRegex: /#26[cC]2[aA]4;/g,
+                    //     replacement: 'var(--singlespa-frame-ant4-primary-color,#26c2a4);'
+                    // }),
                 ] : []
             },
         },
@@ -638,24 +638,6 @@ export default defineConfig((args) => {
 
         // 插件配置
         plugins: [
-            // Less 样式处理插件
-            pluginLess({
-                lessLoaderOptions: {
-                    lessOptions: {
-                        javascriptEnabled: true,
-                        math: 'always',
-                        // Ant Design 主题变量配置
-                        modifyVars: {
-                            "ant-cls-prefix": "applet-base-ant4",
-                            "ihr-prefix": "applet-base-ihr3"
-                        },
-                        // Less 文件查找路径
-                        paths: [
-                            path.resolve(__dirname, 'node_modules'),
-                        ]
-                    },
-                },
-            }),
             // React 插件
             pluginReact(),
             // 生产环境 UMD 构建插件

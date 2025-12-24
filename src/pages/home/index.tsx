@@ -1,7 +1,5 @@
 import * as React from "react";
 import { FormattedMessage, injectIntl } from "irs-react-intl";
-import IrsButton from "ihr360-web-ui3/packages/action/irs-button";
-import IrsPopover from "ihr360-web-ui3/packages/popover/src/popover";
 
 interface HomePageProps {
    bizType?: string;
@@ -14,12 +12,21 @@ class HomePage extends React.Component<HomePageProps> {
    }
    render() {
        return (
-           <div>
-               renderind...
-               <FormattedMessage id="IRS_DICT.cnb_salary_common_attention" defaultMessage="提示" />
-               {this.props.intlMessageManagerLocal('salaryForm')}
-               <IrsPopover title="1111111" content="1111111"><IrsButton>1111</IrsButton></IrsPopover>
+           <div className="p-4">
+               <div className="text-center mt-[200px]  space-y-4">    
+                   <p>rendering...</p>
+                   <p>
+                       <FormattedMessage id="IRS_DICT.cnb_salary_common_attention" defaultMessage="提示" />
+                   </p>
+                   <p>{this.props.intlMessageManagerLocal('salaryForm')}</p>
 
+                   {/* 简单的按钮和弹出示例 - 后续可以添加 shadcn-ui 组件 */}
+                   <div className="mt-4">
+                       <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+                           示例按钮
+                       </button>
+                   </div>
+               </div>
            </div>
        )
    }

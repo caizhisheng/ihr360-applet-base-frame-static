@@ -44,23 +44,6 @@ export const momentI18nToBFC64 = {...i18nToBFC64,
     "en": "en-au",
 } as any;
 
-export const i18nToAntd = {
-    "zh_CN": "zh_CN",
-    "zh_TW": "zh_TW",
-    "en": "en_US",
-    "ja": "ja_JP",
-    "fr_FR": "fr_FR",
-    "es_ES": "es_ES",
-    "de_DE": "de_DE",
-    "ko_KR": "ko_KR",
-    "in_ID": "id_ID",
-    "pt_PT": "pt_PT",
-    "vi_VN": "vi_VN",
-    "th_TH": "th_TH",
-    "ar_AE": "ar_EG",
-    "tr_TR": "tr_TR"
-} as any;
-
 export const ROUTER_PAGE_NAME_OBJ = {
     "/base/home": "首页",
     "/base/demo": "示例"

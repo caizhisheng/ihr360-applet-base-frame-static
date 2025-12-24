@@ -11,32 +11,11 @@ import { getLanguage } from 'irs-react-intl';
 import ConfigureStore from './store/configureStore';
 import moment from 'moment';
 import 'url-search-params-polyfill';//处理URLSearchParams的兼容性
-import "./assets/less/common.less";
-import "ihr360-web-ui3/packages/theme/index.less";
-import 'antd4/dist/antd.less';
-import { zh_CN, en } from 'ihr360-web-ui3/packages/locale';
-import IrsConfigProvider from 'ihr360-web-ui3/packages/config-provider/IrsConfigProvider';
-import IrsNotification from 'ihr360-web-ui3/packages/base/irs-notification';
-import IrsMessageBox from 'ihr360-web-ui3/packages/message/irs-message-box';
-import IrsMessage from 'ihr360-web-ui3/packages/message/irs-message-toast';
+import './index.css';
 import { IrsDataStorage } from 'irs-tools';
-import { i18nToAntd, momentI18nToBFC64, i18nToBFC64 } from './constants/actionsTypes';
-import IrsLoading from 'ihr360-web-ui3/packages/loading/irs-loading';
+import { momentI18nToBFC64, i18nToBFC64 } from './constants/actionsTypes';
+import { Spinner } from '@/components/ui/spinner';
 import routerConfig from './router/routerConfig';
-const theme = require('../package.json').theme;
-
-IrsNotification.config({
-	ihrPrefixCls: theme["ihr-prefix"],
-	antPrefixCls: theme["ant-cls-prefix"],
-})
-IrsMessageBox.config({
-	ihrPrefixCls: theme["ihr-prefix"],
-	antPrefixCls: theme["ant-cls-prefix"],
-})
-IrsMessage.config({
-	ihrPrefixCls: theme["ihr-prefix"],
-	antPrefixCls: theme["ant-cls-prefix"],
-})
 const projectName = require('../package.json').name;
 const store = ConfigureStore();
 
@@ -47,12 +26,6 @@ try {
     lanData = []
 }
 const language = IrsDataStorage.getCookie('irenshilocale') || 'zh_CN'//me.locale
-const webui3SupportLanguage = {
-    'zh_CN': zh_CN,
-    'en': en
-} as any;
-const webUi3Language = webui3SupportLanguage[language]; 
-const antdLanguage = i18nToAntd[language];
 const momentLanguage = momentI18nToBFC64[language];
 // @ts-ignore
 const momentLocal = require(`moment/locale/${momentLanguage}`);
@@ -79,17 +52,23 @@ class RootComponent extends React.Component<any, any> {
     }
     render () {
         if(this.state.lanDataLoading) {
-            return <IrsLoading spinning={true} delay={0} className="router-spin-loading" tip="" />
+            return (
+                <div className="flex h-screen w-full items-center justify-center">
+                    <Spinner spinning={true} size="lg" />
+                </div>
+            )
         }
         return (
             <IntlProvider key={i18nToBFC64[language]} locale={i18nToBFC64[language]} messages={this.state.lanData}>
-                <IrsConfigProvider locale={antdLanguage} localeEntry={webUi3Language} antPrefixCls={theme["ant-cls-prefix"]} ihrPrefixCls={theme["ihr-prefix"]}>
-                    <Provider store={store}>
-                        <Suspense fallback={<IrsLoading spinning={true} tip="页面加载中..." />}>
-                            <RouterProvider router={router} />
-                        </Suspense>
-                    </Provider>
-                </IrsConfigProvider>
+                <Provider store={store}>
+                    <Suspense fallback={
+                        <div className="flex h-screen w-full items-center justify-center">
+                            <Spinner spinning={true} size="lg" tip="页面加载中..." />
+                        </div>
+                    }>
+                        <RouterProvider router={router} />
+                    </Suspense>
+                </Provider>
             </IntlProvider>
         )
     }
