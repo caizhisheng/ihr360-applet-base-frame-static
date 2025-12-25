@@ -26,7 +26,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>子模块脚手架</title>
+    <title>AI Studio For Web</title>
 </head>
 <!-- background: #f0f2f5 -->
 
@@ -35,7 +35,6 @@
         You need to enable JavaScript to run this app.
     </noscript>
     <div id="applet-base-spa" class="applet-base-spa"></div>
-
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -47,25 +46,5 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 </body>
-<script>
-    //支持rem
-    (function (doc, win) {
-        var docEl = doc.documentElement
-        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-        function recalc () {
-            var clientWidth = docEl.clientWidth
-            if (!clientWidth) {
-            return false
-            }
-            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
-        }
-        if (!doc.addEventListener) {
-            return false
-        }
-        win.addEventListener(resizeEvt, recalc, false)
-        doc.addEventListener('DOMContentLoaded', recalc, false)
-    })(document, window)
-
-</script>
 
 </html>

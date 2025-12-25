@@ -27,15 +27,6 @@ const routerConfig = [
                 Component: HomePage.default,
               };
             },
-          },
-          {
-            path: "demo", 
-            async lazy() {
-              const DemoPage = await import('../pages/demo');
-              return {
-                Component: DemoPage.default,
-              };
-            },
           }
         ]
     }

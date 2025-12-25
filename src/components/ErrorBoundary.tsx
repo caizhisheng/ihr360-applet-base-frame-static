@@ -1,10 +1,4 @@
 import * as React from 'react';
-import * as Sentry from '@sentry/browser';
-// import { IrsError } from 'ihr360-web-ui3';
-
-Sentry.init({
-  dsn: "https://5aeb981ed5364582920447314cfe7c7a@sentry.io/1367409"
-});
 
 class ErrorBoundary extends React.Component<any, any> {
   constructor(props: any) {
@@ -14,15 +8,8 @@ class ErrorBoundary extends React.Component<any, any> {
   componentDidCatch(error: any, errorInfo: any) {
     // Display fallback UI
     this.setState({ hasError: true });
-    Sentry.withScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
-        scope.setExtra(key, errorInfo[key]);
-      });
-      Sentry.captureException(error);
-    });
   }
   reportError = () => {
-    Sentry.showReportDialog()
   }
   render() {
     if (this.state.hasError) {

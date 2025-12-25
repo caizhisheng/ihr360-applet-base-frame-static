@@ -4,7 +4,6 @@
  * @time 2018/05/09
  * @author Mike.Cai
  */
-//import { IrsMessage } from '../../../index';
 const getCookie = (name: any) => {
     const arrs = document.cookie.split('; ');
     for (const arr of arrs) {

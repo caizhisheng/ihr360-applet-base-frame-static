@@ -1,7 +1,6 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginUmd } from '@rsbuild/plugin-umd';
-import rspack from '@rspack/core';
 import path from 'path';
 import dotenv from 'dotenv';
 import fs from 'fs';
@@ -129,6 +128,15 @@ export default defineConfig((args) => {
 
         // 工具配置
         tools: {
+            // PostCSS 配置 - Tailwind CSS v4
+            postcss: {
+                postcssOptions: {
+                    plugins: [
+                        require('@tailwindcss/postcss'),
+                        require('autoprefixer')
+                    ]
+                }
+            },
             // SWC 配置 - 支持空值合并运算符(??)和可选链操作符(?.)
             swc: {
                 jsc: {

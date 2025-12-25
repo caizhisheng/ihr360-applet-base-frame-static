@@ -8,7 +8,6 @@
         "@rsbuild/core": "^1.5.4",
         "@rsbuild/plugin-react": "^1.4.0",
         "@rsbuild/plugin-umd": "^1.0.4",
-        "@sentry/browser": "^10.32.1",
         "@tailwindcss/postcss": "^4.1.18",
         "ahooks": "^3.9.5",
         "dotenv": "^17.2.1",
@@ -23,17 +22,13 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-intl": "6.4.4",
-        "react-redux": "^9.0.0",
         "react-router-dom": "6.22.3",
         "react-scripts": "5.0.1",
-        "redux": "^5.0.1",
-        "redux-devtools-extension": "2.13.2",
-        "redux-logger": "3.0.6",
-        "redux-thunk": "2.2.0",
         "single-spa-react": "6.0.2",
         "typescript": "^5.9.2",
         "url-search-params-polyfill": "7.0.0",
-        "versiony": "2.0.1"
+        "versiony": "2.0.1",
+        "zustand": "^5.0.9"
     },
     "scripts": {
         "build-vendor": "cross-env NODE_ENV=production webpack --config webpack.dll.config.js --colors --display-modules",

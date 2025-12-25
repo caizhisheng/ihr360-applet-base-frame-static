@@ -4,11 +4,9 @@
  */
 
 import React, { Suspense } from 'react';
-import { Provider } from 'react-redux';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { getLanguage } from 'irs-react-intl';
-import ConfigureStore from './store/configureStore';
 import moment from 'moment';
 import 'url-search-params-polyfill';//处理URLSearchParams的兼容性
 import './index.css';
@@ -17,7 +15,6 @@ import { momentI18nToBFC64, i18nToBFC64 } from './constants/actionsTypes';
 import { Spinner } from '@/components/ui/spinner';
 import routerConfig from './router/routerConfig';
 const projectName = require('../package.json').name;
-const store = ConfigureStore();
 
 let lanData: any = []
 try {
@@ -32,8 +29,6 @@ const momentLocal = require(`moment/locale/${momentLanguage}`);
 moment.locale(i18nToBFC64[language]);
 
 const router = createHashRouter(routerConfig)
-
-// const HomePage = React.lazy(() => import('./pages/home'));
 
 class RootComponent extends React.Component<any, any> {
     constructor(props: any) {
@@ -60,15 +55,13 @@ class RootComponent extends React.Component<any, any> {
         }
         return (
             <IntlProvider key={i18nToBFC64[language]} locale={i18nToBFC64[language]} messages={this.state.lanData}>
-                <Provider store={store}>
-                    <Suspense fallback={
-                        <div className="flex h-screen w-full items-center justify-center">
-                            <Spinner spinning={true} size="lg" tip="页面加载中..." />
-                        </div>
-                    }>
-                        <RouterProvider router={router} />
-                    </Suspense>
-                </Provider>
+                <Suspense fallback={
+                    <div className="flex h-screen w-full items-center justify-center">
+                        <Spinner spinning={true} size="lg" tip="页面加载中..." />
+                    </div>
+                }>
+                    <RouterProvider router={router} />
+                </Suspense>
             </IntlProvider>
         )
     }
